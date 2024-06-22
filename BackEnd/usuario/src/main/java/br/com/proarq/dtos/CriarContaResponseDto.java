@@ -14,7 +14,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class CriarContaResponseDto {
-
+	
+	private String mensagem;
 	private Integer idUsuario;
 	private String nome;
 	private String sobrenome;

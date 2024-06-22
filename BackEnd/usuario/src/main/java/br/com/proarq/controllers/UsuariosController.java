@@ -18,51 +18,60 @@ import br.com.proarq.dtos.RecuperarSenhaResponseDto;
 import br.com.proarq.entities.Usuario;
 import br.com.proarq.helpers.MD5Helper;
 import br.com.proarq.repositories.UsuarioRepository;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/usuarios")
 public class UsuariosController {
-	
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
 	@PostMapping("autenticar")
-	public ResponseEntity<AutenticarResponseDto> autenticar(@RequestBody AutenticarRequestDto dto) {
+	public ResponseEntity<AutenticarResponseDto> autenticar(@RequestBody @Valid AutenticarRequestDto dto) {
 		return null;
 	}
-	
+
 	@PostMapping("criar-conta")
-	public ResponseEntity<CriarContaResponseDto> criarConta(@RequestBody CriarContaRequestDto dto) {
+	public ResponseEntity<CriarContaResponseDto> criarConta(@RequestBody @Valid CriarContaRequestDto dto) {
 		try {
-			Usuario usuario = new Usuario();
-			
-			usuario.setNome(dto.getNome());
-			usuario.setSobrenome(dto.getSobrenome());
-			usuario.setEmail(dto.getEmail());
-			usuario.setSenha(MD5Helper.encryptToMD5(dto.getSenha()));
-			
-			//salvando usuario
-			usuarioRepository.save(usuario); 
-			
 			CriarContaResponseDto response = new CriarContaResponseDto();
-			response.setIdUsuario(usuario.getIdUsuario());
-			response.setNome(usuario.getNome());
-			response.setSobrenome(usuario.getSobrenome());
-			response.setEmail(usuario.getEmail());
-			response.setDataHoraCriacao(Instant.now());
 			
-			
-			return ResponseEntity.status(200).body(response);
-			
+			if (usuarioRepository.findByEmail(dto.getEmail()) != null) {
+				response.setMensagem("O email informado já está cadastro no sistema, tente outro.");
+				// HTTP 400 - CREATED
+				return ResponseEntity.status(400).body(response);
+			} 
+			else {
+				Usuario usuario = new Usuario();
+
+				usuario.setNome(dto.getNome());
+				usuario.setSobrenome(dto.getSobrenome());
+				usuario.setEmail(dto.getEmail());
+				usuario.setSenha(MD5Helper.encryptToMD5(dto.getSenha()));
+
+				// salvando usuario
+				usuarioRepository.save(usuario);
+
+				response.setIdUsuario(usuario.getIdUsuario());
+				response.setNome(usuario.getNome());
+				response.setSobrenome(usuario.getSobrenome());
+				response.setEmail(usuario.getEmail());
+				response.setDataHoraCriacao(Instant.now());
+
+				// HTTP 201 - CREATED
+				return ResponseEntity.status(201).body(response);
+			}
+
 		} catch (Exception e) {
-			//HTTP 500 (INTERNAL SERVER ERROR)
+			// HTTP 500 - INTERNAL SERVER ERROR
 			return ResponseEntity.status(500).body(null);
 		}
 	}
-	
+
 	@PostMapping("recuperar-senha")
-	public ResponseEntity<RecuperarSenhaResponseDto> recuperarSenha(@RequestBody RecuperarSenhaRequestDto dto) {
+	public ResponseEntity<RecuperarSenhaResponseDto> recuperarSenha(@RequestBody @Valid RecuperarSenhaRequestDto dto) {
 		return null;
 	}
-	
+
 }

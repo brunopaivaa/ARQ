@@ -13,10 +13,11 @@ import lombok.ToString;
 @ToString
 public class AutenticarResponseDto {
 	
+	private String mensagem;
 	private Integer idUsuario;
 	private String nome;
 	private String sobrenome;
 	private String email;
-	private String acessToken;
+	private String AccessToken;
 
 }

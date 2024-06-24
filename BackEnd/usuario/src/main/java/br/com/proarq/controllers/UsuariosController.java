@@ -18,6 +18,7 @@ import br.com.proarq.dtos.RecuperarSenhaResponseDto;
 import br.com.proarq.entities.Usuario;
 import br.com.proarq.helpers.MD5Helper;
 import br.com.proarq.repositories.UsuarioRepository;
+import br.com.proarq.services.TokenService;
 import jakarta.validation.Valid;
 
 @RestController
@@ -26,7 +27,10 @@ public class UsuariosController {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-
+	
+	@Autowired
+	private TokenService tokenService;
+	
 	@PostMapping("autenticar")
 	public ResponseEntity<AutenticarResponseDto> autenticar(@RequestBody @Valid AutenticarRequestDto dto) {
 		try {
@@ -39,7 +43,7 @@ public class UsuariosController {
 				response.setIdUsuario(usuario.getIdUsuario());
 				response.setNome(usuario.getNome());
 				response.setEmail(usuario.getEmail());
-				response.setAccessToken(usuario.getEmail());
+				response.setAccessToken(tokenService.generateToken(usuario.getEmail()));
 				// HTTP 200 (OK)
 				return ResponseEntity.ok(response);
 			} else {

@@ -14,6 +14,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 	Usuario findByEmail(@Param("pEmail") String email) throws Exception;
 	
 	@Query("from Usuario u where u.email = :pEmail and u.senha =:pSenha")
-	Usuario findByEmailAndSenha(@Param("pEmail") String email,
-								@Param("pSenha") String senha) throws Exception;
+	Usuario findByEmailAndSenha(@Param("pEmail") String email, @Param("pSenha") String senha)throws Exception;
 }

@@ -1,4 +1,4 @@
-package br.com.proarq.dtos;
+package br.com.proarq.usuario.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

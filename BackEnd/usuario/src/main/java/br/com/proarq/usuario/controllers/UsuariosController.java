@@ -1,4 +1,4 @@
-package br.com.proarq.controllers;
+package br.com.proarq.usuario.controllers;
 
 import java.time.Instant;
 
@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.proarq.dtos.AutenticarRequestDto;
-import br.com.proarq.dtos.AutenticarResponseDto;
-import br.com.proarq.dtos.CriarContaRequestDto;
-import br.com.proarq.dtos.CriarContaResponseDto;
-import br.com.proarq.dtos.RecuperarSenhaRequestDto;
-import br.com.proarq.dtos.RecuperarSenhaResponseDto;
-import br.com.proarq.entities.Usuario;
 import br.com.proarq.helpers.MD5Helper;
-import br.com.proarq.repositories.UsuarioRepository;
 import br.com.proarq.services.TokenService;
+import br.com.proarq.usuario.dtos.AutenticarRequestDto;
+import br.com.proarq.usuario.dtos.AutenticarResponseDto;
+import br.com.proarq.usuario.dtos.CriarContaRequestDto;
+import br.com.proarq.usuario.dtos.CriarContaResponseDto;
+import br.com.proarq.usuario.dtos.RecuperarSenhaRequestDto;
+import br.com.proarq.usuario.dtos.RecuperarSenhaResponseDto;
+import br.com.proarq.usuario.entities.Usuario;
+import br.com.proarq.usuario.repositories.UsuarioRepository;
 import jakarta.validation.Valid;
 
 @RestController

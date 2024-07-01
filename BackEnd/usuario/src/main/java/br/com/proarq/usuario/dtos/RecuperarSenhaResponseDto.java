@@ -1,4 +1,4 @@
-package br.com.proarq.dtos;
+package br.com.proarq.usuario.dtos;
 
 import java.time.Instant;
 
@@ -13,12 +13,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class CriarContaResponseDto {
-	
-	private String mensagem;
-	private Integer idUsuario;
+public class RecuperarSenhaResponseDto {
+
+	private String idUsuario;
 	private String nome;
 	private String sobrenome;
-	private String email;
-	private Instant DataHoraCriacao;
+	private Instant dataHotaRecuperacao;
 }

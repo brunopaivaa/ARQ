@@ -1,4 +1,4 @@
-package br.com.proarq.dtos;
+package br.com.proarq.usuario.dtos;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

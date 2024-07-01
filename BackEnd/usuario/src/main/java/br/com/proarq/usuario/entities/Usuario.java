@@ -1,4 +1,4 @@
-package br.com.proarq.entities;
+package br.com.proarq.usuario.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

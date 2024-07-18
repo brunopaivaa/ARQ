@@ -47,6 +47,7 @@ public class UsuariosController {
 				response.setMensagem("Usuário autenticado com sucesso.");
 				response.setIdUsuario(usuario.getIdUsuario());
 				response.setNome(usuario.getNome());
+				response.setSobrenome(usuario.getSobrenome());
 				response.setEmail(usuario.getEmail());
 				response.setAccessToken(tokenService.generateToken(usuario.getEmail()));
 				// HTTP 200 (OK)
